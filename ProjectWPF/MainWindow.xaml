@@ -3,155 +3,257 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProjectWPF"
         mc:Ignorable="d"
-        Title="MyProject" Height="450" Width="805"
-        ResizeMode="NoResize">
-    <Grid Background="Gray">
-        <DataGrid x:Name="UsersGrid" 
-                  AutoGenerateColumns="False" 
-                  HorizontalAlignment="Center" 
-                  Height="265" 
-                  VerticalAlignment="Top"
-                  Width="800" 
-                  Margin="-3,0,-3.4,0">
-            <DataGrid.Columns>
+        Title="MyProject" Height="450" Width="800">
+    <Grid Background="Gray" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Column="0"
+                  Grid.Row="0"
+                  Grid.ColumnSpan="3"
+                  Grid.RowSpan="2"
+                  x:Name="UsersGrid" 
+                  AutoGenerateColumns="False"
+                  RowHeight="30">
+
+            <DataGrid.Columns >
                 <DataGridTextColumn Binding="{Binding Date}" 
                                     Header="Date" 
-                                    Width="133.3"/>
+                                    Width="*"/>
                 <DataGridTextColumn Binding="{Binding Name}" 
                                     Header="Name" 
-                                    Width="133.3"/>
+                                    Width="*"/>
                 <DataGridTextColumn Binding="{Binding LastName}" 
                                     Header="LastName" 
-                                    Width="133.3"/>
+                                    Width="*"/>
                 <DataGridTextColumn Binding="{Binding Patronymic}" 
                                     Header="Patronymic"
-                                    Width="133.3"/>
+                                    Width="*"/>
                 <DataGridTextColumn Binding="{Binding City}" 
                                     Header="City" 
-                                    Width="133.3"/>
+                                    Width="*"/>
                 <DataGridTextColumn Binding="{Binding Country}"
                                     Header="Country"
-                                    Width="133.3"/>
+                                    Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Prev" 
-                HorizontalAlignment="Left" 
-                Height="38" Margin="10,298,0,0" 
-                VerticalAlignment="Top" 
-                Width="121" 
-                Click="Prev_Click"/>
-        <Button Content="Next" 
-                HorizontalAlignment="Left" 
-                Height="38" 
-                Margin="160,298,0,0" 
-                VerticalAlignment="Top" 
-                Width="121" 
-                Click="Next_Click"/>
-        <Button Content="Open file" 
-                HorizontalAlignment="Left" 
-                Height="38" 
-                Margin="10,348,0,0" 
-                VerticalAlignment="Top" 
-                Width="121" 
-                Click="BtnOpenFile_Click"/>
-        <Button Content="Save filtration" 
-                HorizontalAlignment="Left" 
-                Height="38" 
-                Margin="160,348,0,0" 
-                VerticalAlignment="Top" 
-                Width="121" 
-                Click="BtnSaveToFile_Click"/>
-        <Grid HorizontalAlignment="Left" 
-              Height="160" 
-              Margin="310,265,0,0" 
-              VerticalAlignment="Top"
-              Width="479"
-              Background="#FFCACACA">
-            <TextBlock HorizontalAlignment="Left"
-                       Margin="20,0,0,0" 
-                       TextAlignment="Center" 
-                       TextWrapping="Wrap" 
-                       Text="Filtration:"
-                       VerticalAlignment="Top" 
-                       Width="474"/>
-            <Label Content="Date" 
-                   HorizontalAlignment="Left" 
-                   Height="23" Margin="282,32,0,0" 
-                   VerticalAlignment="Top" 
-                   Width="80"/>
-            <Label Content="Name"
-                   HorizontalAlignment="Left"
-                   Height="23"
-                   Margin="20,32,0,0" 
-                   VerticalAlignment="Top" 
-                   Width="80"/>
-            <Label Content="LastName" 
-                   HorizontalAlignment="Left" 
-                   Height="23" 
-                   Margin="20,63,0,0" 
-                   VerticalAlignment="Top" 
-                   Width="80" 
-                   RenderTransformOrigin="0.5,0.704"/>
-            <Label Content="Patronymic" 
-                   HorizontalAlignment="Left" 
-                   Height="30" Margin="20,98,0,0" 
-                   VerticalAlignment="Top" 
-                   Width="80"/>
-            <Label Content="City" 
-                   HorizontalAlignment="Left"
-                   Height="28" 
-                   Margin="282,68,0,0" 
-                   VerticalAlignment="Top" 
-                   Width="80"/>
-            <Label Content="Country"
-                   HorizontalAlignment="Left"
-                   Height="35" 
-                   Margin="282,98,0,0" 
-                   VerticalAlignment="Top"
-                   Width="55"/>
-            <TextBox x:Name="Country" 
-                     HorizontalAlignment="Left"
-                     Height="20" 
-                     Margin="345,101,0,0" 
-                     TextWrapping="Wrap"
-                     VerticalAlignment="Top"
-                     Width="120"
-                     RenderTransformOrigin="0.458,1.26"/>
-            <TextBox x:Name="LastName"
-                     HorizontalAlignment="Left"
-                     Height="20" 
-                     Margin="120,67,0,0" 
-                     TextWrapping="Wrap"
-                     VerticalAlignment="Top"
-                     Width="120"/>
-            <TextBox x:Name="Name" 
-                     HorizontalAlignment="Left" 
-                     Height="20" Margin="120,35,0,0"
-                     TextWrapping="Wrap"
-                     VerticalAlignment="Top" 
-                     Width="120"/>
-            <TextBox x:Name="Patronymic"
-                     HorizontalAlignment="Left"
-                     Height="20" 
-                     Margin="120,101,0,0" 
-                     TextWrapping="Wrap" 
-                     VerticalAlignment="Top" 
-                     Width="120"/>
-            <TextBox x:Name="City" 
-                     HorizontalAlignment="Left" 
-                     Height="20" Margin="345,67,0,0" 
-                     TextWrapping="Wrap" 
-                     VerticalAlignment="Top" 
-                     Width="120" 
-                     RenderTransformOrigin="0.503,0.1"/>
-            <DatePicker x:Name="Date" 
-                        HorizontalAlignment="Left" 
-                        Height="20" Margin="345,35,0,0" 
-                        VerticalAlignment="Top" 
-                        Width="120"/>
+        <Grid Grid.Row="2" 
+              Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0"
+                    Grid.Column="0"
+                    Content="Prev"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Height="38"
+                    Width="121"
+                    Click="Prev_Click"/>
+            <Button Grid.Row="0"
+                    Grid.Column="1"
+                    Content="Next"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Height="38" 
+                    Width="121"
+                    Click="Next_Click"/>
+            <Button Grid.Row="1"
+                    Grid.Column="0"
+                    Content="Open file" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"      
+                    Height="38" 
+                    Width="121"
+                    Click="BtnOpenFile_Click"/>
+            <Button Grid.Row="1"
+                    Grid.Column="1"
+                    Content="Save filtration" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Height="38" 
+                    Width="121"
+                    Click="BtnSaveToFile_Click"/>
+        </Grid>
+
+        <Grid Grid.Row="2"
+              Grid.Column="1"
+              Grid.ColumnSpan="2"
+              Background="#FFCACACA"
+              >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="1"
+                  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Content="Date"/>
+
+                <DatePicker Grid.Row="0"
+                            Grid.Column="1"
+                            x:Name="Date"
+                            VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  Grid.Column="1"
+                  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Content="City"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         x:Name="City"
+                         VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Row="3"
+                  Grid.Column="1"
+                  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Content="Country"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         x:Name="Country"
+                         VerticalAlignment="Center"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="0"
+                  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Content="Name"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         x:Name="Name"
+                         VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  Grid.Column="0"
+                  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Content="LastName"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         x:Name="LastName"
+                         VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Row="3"
+                  Grid.Column="0"
+                  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Content="Patronymic"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         x:Name="Patronymic"
+                         VerticalAlignment="Center"/>
+            </Grid>
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="Filtration:"/>
         </Grid>
     </Grid>
 </Window>
