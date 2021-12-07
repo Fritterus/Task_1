@@ -1,7 +1,9 @@
-﻿using DAL.Models;
+﻿using BLL.ModelsDTO;
+using DAL.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace BLL
+namespace BLL.Interfaces
 {
     public interface IUserService
     {
@@ -14,6 +16,6 @@ namespace BLL
         /// Method for getting a list of all users
         /// </summary>
         /// <returns>list of all users</returns>
-        public List<User> GetAllUsers(int from, int count);
+        public List<UserDTO> GetAllUsers(int from, int count);
     }
 }

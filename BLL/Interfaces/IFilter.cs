@@ -1,6 +1,8 @@
-﻿using DAL.Models;
+﻿using BLL.ModelsDTO;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BLL.Interfaces
 {
@@ -16,7 +18,7 @@ namespace BLL.Interfaces
         /// <param name="city">city</param>
         /// <param name="country">country</param>
         /// <returns>filtered list of users</returns>
-        public List<User> Filtration(DateTime? date = null,
+        public List<UserDTO> Filtration(DateTime? date = null,
                            string name = null,
                            string lastName = null,
                            string patronymic = null,
