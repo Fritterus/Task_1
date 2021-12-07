@@ -1,11 +1,5 @@
 ﻿using BLL.Interfaces;
-using DAL.Models;
-using Microsoft.Win32;
 using ProjectWPF.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ProjectWPF
