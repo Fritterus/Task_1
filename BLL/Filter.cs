@@ -1,10 +1,14 @@
-﻿using BLL.Interfaces;
+﻿using AutoMapper;
+using BLL.Interfaces;
+using BLL.ModelsDTO;
 using DAL.Interfaces;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace BLL
 {
@@ -14,14 +18,16 @@ namespace BLL
     internal class Filter : IFilter
     {
         private readonly IRepository<User> _db;
+        private readonly IMapper _mapper;
 
-        public Filter(IRepository<User> db)
+        public Filter(IRepository<User> db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
 
         /// <inheritdoc/>
-        public List<User> Filtration(DateTime? date = null,
+        public List<UserDTO> Filtration(DateTime? date = null,
                            string name = null,
                            string lastName = null,
                            string patronymic = null,
@@ -57,7 +63,7 @@ namespace BLL
                 users = users.Where(e => e.Country == country);
             }
 
-            return users.ToList();
+            return _mapper.Map<List<UserDTO>>(users);
         }
 
         /// <summary>
