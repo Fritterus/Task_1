@@ -1,4 +1,6 @@
-﻿using BLL.Interfaces;
+﻿using AutoMapper;
+using BLL.Interfaces;
+using BLL.ModelsDTO;
 using CsvHelper;
 using DAL.Interfaces;
 using DAL.Models;
@@ -18,10 +20,12 @@ namespace BLL.WorkFile
     internal class FileService : IFileService
     {
         private readonly IRepository<User> _db;
+        private readonly IMapper _mapper;
 
-        public FileService(IRepository<User> db)
+        public FileService(IRepository<User> db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
 
         /// <inheritdoc/>
@@ -49,16 +53,17 @@ namespace BLL.WorkFile
         }
 
         /// <inheritdoc/>
-        public void WriteToCsvFile(string pathFile, List<User> users)
+        public async Task WriteToCsvFile(string pathFile, List<UserDTO> users)
         {
             try
             {
+                _mapper.Map<List<User>>(users);
                 using var streamReader = new StreamWriter(pathFile);
                 using var csvReader = new CsvWriter(streamReader, CultureInfo.GetCultureInfo("ru-ru"));
                 csvReader.Configuration.HasHeaderRecord = false;
                 csvReader.Configuration.Delimiter = ";";
                 csvReader.Configuration.RegisterClassMap<UserMap>();
-                csvReader.WriteRecords(users);
+                await csvReader.WriteRecordsAsync(users);
             }
             catch (Exception)
             {
@@ -67,10 +72,11 @@ namespace BLL.WorkFile
         }
 
         /// <inheritdoc/>
-        public void WriteToXmlFile(string pathFile, List<User> users)
+        public async Task WriteToXmlFile(string pathFile, List<UserDTO> users)
         {
             try
             {
+                _mapper.Map<List<User>>(users);
                 var elements = new XElement("TestProgram",
                 users.Select(obj => new XElement("Record",
                     new XAttribute("Id", obj.Id),
