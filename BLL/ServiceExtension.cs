@@ -1,4 +1,5 @@
 ﻿using BLL.Interfaces;
+using BLL.Mappers;
 using BLL.WorkFile;
 using DAL;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ namespace BLL
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IFilter, Filter>();
             services.AddScoped<IUserService, UserService>();
+            services.AddAutoMapper(typeof(ServiceMapperProfile));
         }
     }
 }
