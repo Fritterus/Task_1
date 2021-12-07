@@ -1,4 +1,5 @@
-﻿using DAL.Models;
+﻿using BLL.ModelsDTO;
+using DAL.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,13 +18,13 @@ namespace BLL.Interfaces
         /// </summary>
         /// <param name="pathFile">path to file</param>
         /// <param name="users">list of users</param>
-        public void WriteToCsvFile(string pathFile, List<User> users);
+        public Task WriteToCsvFile(string pathFile, List<UserDTO> users);
 
         /// <summary>
         /// Method for writing data to xml file
         /// </summary>
         /// <param name="pathFile">path to file</param>
         /// <param name="users">list of users</param>
-        public void WriteToXmlFile(string pathFile, List<User> users);
+        public Task WriteToXmlFile(string pathFile, List<UserDTO> users);
     }
 }
