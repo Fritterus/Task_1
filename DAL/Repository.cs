@@ -19,10 +19,10 @@ where T : class
         }
 
         /// <inheritdoc/>
-        public void AddRange(IEnumerable<T> obj)
+        public async Task AddRange(IEnumerable<T> obj)
         {
-            _userContext.AddRange(obj);
-            _userContext.SaveChanges();
+            await _userContext.AddRangeAsync(obj);
+            await _userContext.SaveChangesAsync();
         }
 
         /// <inheritdoc/>

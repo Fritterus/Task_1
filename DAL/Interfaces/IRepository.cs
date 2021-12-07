@@ -31,7 +31,7 @@ namespace DAL.Interfaces
         /// Method for creating multiple records in database
         /// </summary>
         /// <param name="obj"></param>
-        void AddRange(IEnumerable<T> obj);
+        Task AddRange(IEnumerable<T> obj);
 
         /// <summary>
         /// Method for updating record in database
