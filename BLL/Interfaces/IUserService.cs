@@ -1,5 +1,4 @@
 ﻿using BLL.ModelsDTO;
-using DAL.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,6 +15,6 @@ namespace BLL.Interfaces
         /// Method for getting a list of all users
         /// </summary>
         /// <returns>list of all users</returns>
-        public List<UserDTO> GetAllUsers(int from, int count);
+        public Task<List<UserDTO>> GetAllUsersAsync(int from, int count);
     }
 }

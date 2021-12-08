@@ -18,7 +18,7 @@ namespace BLL.Interfaces
         /// <param name="city">city</param>
         /// <param name="country">country</param>
         /// <returns>filtered list of users</returns>
-        public List<UserDTO> Filtration(DateTime? date = null,
+        public Task<List<UserDTO>> FiltrationAsync(DateTime? date = null,
                            string name = null,
                            string lastName = null,
                            string patronymic = null,
