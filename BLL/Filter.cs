@@ -27,7 +27,7 @@ namespace BLL
         }
 
         /// <inheritdoc/>
-        public List<UserDTO> Filtration(DateTime? date = null,
+        public async Task<List<UserDTO>> FiltrationAsync(DateTime? date = null,
                            string name = null,
                            string lastName = null,
                            string patronymic = null,
@@ -63,7 +63,7 @@ namespace BLL
                 users = users.Where(e => e.Country == country);
             }
 
-            return _mapper.Map<List<UserDTO>>(users);
+            return _mapper.Map<List<UserDTO>>(await users.ToListAsync());
         }
 
         /// <summary>
