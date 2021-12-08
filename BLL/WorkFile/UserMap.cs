@@ -1,9 +1,9 @@
-﻿using CsvHelper.Configuration;
-using DAL.Models;
+﻿using BLL.ModelsDTO;
+using CsvHelper.Configuration;
 
 namespace BLL.WorkFile
 {
-    internal class UserMap : ClassMap<User>
+    internal class UserMap : ClassMap<UserDTO>
     {
         public UserMap()
         {
