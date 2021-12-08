@@ -11,6 +11,5 @@ namespace BLL.Mappers
             CreateMap<UserDTO, User>();
             CreateMap<User, UserDTO>();
         }
-
     }
 }
