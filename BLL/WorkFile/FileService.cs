@@ -20,12 +20,10 @@ namespace BLL.WorkFile
     internal class FileService : IFileService
     {
         private readonly IRepository<User> _db;
-        private readonly IMapper _mapper;
 
-        public FileService(IRepository<User> db, IMapper mapper)
+        public FileService(IRepository<User> db)
         {
             _db = db;
-            _mapper = mapper;
         }
 
         /// <inheritdoc/>
@@ -53,11 +51,10 @@ namespace BLL.WorkFile
         }
 
         /// <inheritdoc/>
-        public async Task WriteToCsvFile(string pathFile, List<UserDTO> users)
+        public async Task WriteToCsvFileAsync(string pathFile, List<UserDTO> users)
         {
             try
             {
-                _mapper.Map<List<User>>(users);
                 using var streamReader = new StreamWriter(pathFile);
                 using var csvReader = new CsvWriter(streamReader, CultureInfo.GetCultureInfo("ru-ru"));
                 csvReader.Configuration.HasHeaderRecord = false;
@@ -72,11 +69,10 @@ namespace BLL.WorkFile
         }
 
         /// <inheritdoc/>
-        public async Task WriteToXmlFile(string pathFile, List<UserDTO> users)
+        public Task WriteToXmlFile(string pathFile, List<UserDTO> users)
         {
             try
             {
-                _mapper.Map<List<User>>(users);
                 var elements = new XElement("TestProgram",
                 users.Select(obj => new XElement("Record",
                     new XAttribute("Id", obj.Id),
@@ -86,7 +82,7 @@ namespace BLL.WorkFile
                         new XElement("Patronymic", obj.Patronymic),
                         new XElement("City", obj.City),
                         new XElement("Country", obj.Country))));
-                elements.Save(pathFile);
+                return Task.Run(() => { elements.Save(pathFile); });
             }
             catch (Exception)
             {
