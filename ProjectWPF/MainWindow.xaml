@@ -130,7 +130,7 @@
                             Grid.Column="1"
                             x:Name="Date"
                             VerticalAlignment="Center"
-                            DataContext="{Binding Date}"/>
+                            SelectedDate="{Binding Date}"/>
             </Grid>
 
             <Grid Grid.Row="2"

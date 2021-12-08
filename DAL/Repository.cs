@@ -1,15 +1,16 @@
-﻿using DAL.Interfaces;
-using DAL.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using DAL.Interfaces;
+using DAL.Models;
+
 
 namespace DAL
 {
     internal class Repository<T> : IRepository<T>
-where T : class
+        where T : class
     {
         private readonly UserContext _userContext;
 

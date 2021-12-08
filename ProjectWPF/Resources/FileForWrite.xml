@@ -1,19 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TestProgram>
-  <Record Id="185">
-    <Date>23.08.2021</Date>
+  <Record Id="1">
+    <Date>29.03.2021</Date>
     <Name>Artyom</Name>
-    <LastName>Vinogradov</LastName>
-    <Patronymic>Andreevich</Patronymic>
-    <City>Taylorsville</City>
-    <Country>USA</Country>
-  </Record>
-  <Record Id="187">
-    <Date>08.03.2021</Date>
-    <Name>Artyom</Name>
-    <LastName>Bykov</LastName>
-    <Patronymic>Andreevich</Patronymic>
-    <City>Sumy</City>
-    <Country>Ukraine</Country>
+    <LastName>Titov</LastName>
+    <Patronymic>Aleksandrovich</Patronymic>
+    <City>Mozyr</City>  
+    <Country>Belarus</Country>
   </Record>
 </TestProgram>

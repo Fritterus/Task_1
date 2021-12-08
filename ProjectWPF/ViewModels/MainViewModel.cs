@@ -2,17 +2,19 @@
 using BLL.ModelsDTO;
 using Microsoft.Win32;
 using ProjectWPF.Commands;
+using ProjectWPF.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace ProjectWPF.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged, IAsyncInitialization
     {
         private readonly IFileService _fileService;
         private readonly IFilter _filter;
@@ -30,7 +32,7 @@ namespace ProjectWPF.ViewModels
         public string Patronymic { get; set; } = "";
         public string City { get; set; } = "";
         public string Country { get; set; } = "";
-        public DateTime? Date { get; set; } = null;
+        public DateTime? Date { get; set; }
 
         public ObservableCollection<UserDTO> Users
         {
@@ -48,20 +50,28 @@ namespace ProjectWPF.ViewModels
             _filter = filter;
             _userService = userService;
 
-            Users = new ObservableCollection<UserDTO>(_userService.GetAllUsers(0, RECORDS));
+            Initialization = InitializeAsync();
         }
 
-        public RelayCommand ShowPreviousPage => new(obj =>
+        /// <inheritdoc/>
+        public Task Initialization { get; private set; }
+
+        private async Task InitializeAsync()
+        {
+            Users = new ObservableCollection<UserDTO>(await _userService.GetAllUsersAsync(0, RECORDS));
+        }
+
+        public RelayCommand ShowPreviousPage => new(async obj =>
         {
             if (_currentPage == 0)
             {
                 return;
             }
 
-            Users = new ObservableCollection<UserDTO>(_userService.GetAllUsers((--_currentPage) * RECORDS, RECORDS));
+            Users = new ObservableCollection<UserDTO>(await _userService.GetAllUsersAsync((--_currentPage) * RECORDS, RECORDS));
         });
 
-        public RelayCommand ShowNextPage => new(obj =>
+        public RelayCommand ShowNextPage => new(async obj =>
         {
             if (RECORDS > _userService.Count)
             {
@@ -73,10 +83,10 @@ namespace ProjectWPF.ViewModels
                 return;
             }
 
-            Users = new ObservableCollection<UserDTO>(_userService.GetAllUsers((++_currentPage) * RECORDS, RECORDS));
+            Users = new ObservableCollection<UserDTO>(await _userService.GetAllUsersAsync((++_currentPage) * RECORDS, RECORDS));
         });
 
-        public RelayCommand OpenFile => new(obj =>
+        public RelayCommand OpenFile => new(async obj =>
         {
             var openFileDialog = new OpenFileDialog
             {
@@ -89,24 +99,24 @@ namespace ProjectWPF.ViewModels
 
                 try
                 {
-                    _fileService.ImportFromCsvToDatabase(pathFile);
+                    await _fileService.ImportFromCsvToDatabase(pathFile);
                 }
                 catch (IOException ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
 
-                Users = new ObservableCollection<UserDTO>(_userService.GetAllUsers(_currentPage, RECORDS));
+                Users = new ObservableCollection<UserDTO>(await _userService.GetAllUsersAsync(_currentPage, RECORDS));
             }
         });
 
-        public RelayCommand SaveToFile => new(obj =>
+        public RelayCommand SaveToFile => new(async obj =>
         {
             var users = new List<UserDTO>();
 
             try
             {
-                users = _filter.Filtration(Date, Name, LastName, Patronymic, City, Country);
+                users = await _filter.FiltrationAsync(Date, Name, LastName, Patronymic, City, Country);
             }
             catch (ArgumentException ex)
             {
@@ -128,11 +138,11 @@ namespace ProjectWPF.ViewModels
                 {
                     if (fileFormat == ".csv")
                     {
-                        _fileService.WriteToCsvFile(pathFile, users);
+                        await _fileService.WriteToCsvFileAsync(pathFile, users);
                     }
                     else if (fileFormat == ".xml")
                     {
-                        _fileService.WriteToXmlFile(pathFile, users);
+                        await _fileService.WriteToXmlFile(pathFile, users);
                     }
                     else
                     {
