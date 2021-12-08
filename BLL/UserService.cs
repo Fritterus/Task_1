@@ -25,9 +25,9 @@ namespace BLL
         public int Count => _db.GetAll().Count();
 
         /// <inheritdoc/>
-        public List<UserDTO> GetAllUsers(int from, int count)
+        public async Task<List<UserDTO>> GetAllUsersAsync(int from, int count)
         {
-            var users = _db.GetAll().Skip(from).Take(count).ToList();
+            var users = await _db.GetAll().Skip(from).Take(count).ToListAsync();
             return _mapper.Map<List<UserDTO>>(users);
         }
     }
